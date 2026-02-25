@@ -21,7 +21,6 @@ import CalendarPage from '@pages/CalendarPage';
 import { authService, projectService, taskService, subtaskService, columnService, teamService, messageService, userService, fetchVersion, registerForPush, unregisterPush, folderService } from '@services/index';
 import type { Project, Task, Subtask, User, Team, DirectMessage, Folder } from '@/types';
 import { Layout } from 'lucide-react';
-import { on } from 'events';
 
 
 

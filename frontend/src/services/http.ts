@@ -2,8 +2,6 @@
  * HTTP Client - Base HTTP utility for all API calls
  */
 
-import { add } from "@dnd-kit/utilities";
-
 const API_BASE_URL = import.meta.env.VITE_API_URL + "/api";
 
 let authToken: string | null = null;
@@ -65,8 +63,14 @@ export async function apiRequest<T>(endpoint: string, options: RequestInit = {})
     try {
         fetchVersion++;
         const response = await fetch(`${API_BASE_URL}${endpoint}`, config)
+
+        if (response.status === 401 && endpoint === '/users/me/') {
+            clearAuthToken();
+            throw new Error("Invalid session. Please log in again.");
+        }
         
         if (response.status === 401 && endpoint !== '/push-tokens/' && endpoint !== '/token/') {
+            clearAuthToken();
             window.location.reload();
             throw new Error("Session expired. Please log in again.");
         }
