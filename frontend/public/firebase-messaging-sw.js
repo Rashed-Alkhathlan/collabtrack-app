@@ -1,5 +1,4 @@
 // Minimal service worker to handle background push messages.
-// Place this file in `frontend/public/` so it's served at `/firebase-messaging-sw.js`.
 
 self.addEventListener('push', function(event) {
   let payload = {};
